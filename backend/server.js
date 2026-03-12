@@ -617,6 +617,7 @@ async function connectMongo() {
             serverSelectionTimeoutMS: 15000,
             connectTimeoutMS: 15000,
             socketTimeoutMS: 45000,
+            family: 4, // Force IPv4 — fixes Render→Atlas SRV DNS resolution issues
         });
         console.log("MongoDB connected.");
         const readiness = getAuthReadiness();
