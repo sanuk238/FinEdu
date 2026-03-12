@@ -62,7 +62,8 @@ mongoose.connection.on("error", (error) => {
 });
 
 mongoose.connection.on("disconnected", () => {
-    console.warn("MongoDB disconnected");
+    console.warn("MongoDB disconnected — will retry in 30s...");
+    setTimeout(() => connectMongo(), 30000);
 });
 
 function isAllowedOrigin(origin) {
@@ -608,11 +609,20 @@ async function connectMongo() {
         return;
     }
 
+    // Skip if already connected or connecting
+    if (mongoose.connection.readyState === 1 || mongoose.connection.readyState === 2) return;
+
     try {
-        await mongoose.connect(mongoUri);
+        await mongoose.connect(mongoUri, {
+            serverSelectionTimeoutMS: 15000,
+            connectTimeoutMS: 15000,
+            socketTimeoutMS: 45000,
+        });
         console.log("MongoDB connected.");
     } catch (error) {
-        console.error("MongoDB connection error:", error.message);
+        console.error("MongoDB connection failed:", error.message, "| code:", error.code || "N/A");
+        console.error("Retrying MongoDB connection in 30s...");
+        setTimeout(() => connectMongo(), 30000);
     }
 }
 
