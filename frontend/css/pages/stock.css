@@ -1,0 +1,32 @@
+.page-stock .stock-header-card,
+.page-stock .stock-chart-card,
+.page-stock .stock-peers-card,
+.page-stock .stock-metrics-section,
+.page-stock .stock-overview-card {
+  border-radius: 24px;
+}
+
+.page-stock .quick-metric-card,
+.page-stock .metric-card,
+.page-stock .overview-panel,
+.page-stock .financial-table-wrap {
+  border-radius: 20px;
+}
+
+.page-stock .stock-section-nav {
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 768px) {
+  .page-stock .stock-header-card,
+  .page-stock .stock-chart-card,
+  .page-stock .stock-peers-card,
+  .page-stock .stock-metrics-section,
+  .page-stock .stock-overview-card {
+    border-radius: 20px;
+  }
+}
+  .page-stock .stock-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}

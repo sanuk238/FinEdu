@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinEdu - Financial Tools</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/pages/tools.css" />
+    <link rel="stylesheet" href="../css/pages/chatbot.css" />
+</head>
+
+<body class="page-tools">
+    <!--
+      File Map (Tools):
+      1) Header/Nav
+      2) Tools hero intro
+      3) Calculator grid cards
+      4) Footer + /pages/tools.js calculator handlers
+    -->
+
+    <!-- ================= HEADER / NAVBAR ================= -->
+    <header class="header" role="banner">
+    <div class="nav container">
+        <a href="../index.html" class="logo" aria-label="FinEdu Home">
+            <span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span>
+        </a>
+
+        <nav class="nav-links" aria-label="Main Navigation">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="./screener.html">Screener</a></li>
+                    <li><a href="./tools.html" class="active">Tools</a></li>
+                    <li><a href="./courses.html">Courses</a></li>
+                    <li><a href="./learning.html">Learning</a></li>
+                    <li><a href="./seminars.html">Seminars</a></li>
+                    <li><a href="./news.html">News</a></li>
+                </ul>
+        </nav>
+
+    </div>
+</header>
+
+    <!-- ================= CALC HERO ================= -->
+    <main class="page-enter">
+
+        <section class="calc-hero" aria-label="Calc">
+            <div class="container calc-hero-grid">
+                <div class="calc-hero-copy">
+                    <h1>Master Your <span class="text-gradient">Financial Planning</span></h1>
+                    <p class="hero-tagline">Smart Financial Calculators</p>
+                    <p class="supporting-text">Make confident financial decisions with accurate, easy-to-use calculators designed for everyday planning.</p>
+                    <div class="calc-hero-actions">
+                        <a href="#popular-tools-title" class="btn btn-primary">Start With Popular Tools</a>
+                        <a href="#investment-tools-title" class="btn btn-secondary">Explore All Tools</a>
+                    </div>
+
+                    <div class="calc-hero-search-wrap" aria-label="Search calculators">
+                        <span class="tools-search-icon" aria-hidden="true">&#128269;</span>
+                        <input id="calculatorSearch" class="calc-hero-search-input" type="search" placeholder="Search calculators" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="calc-hero-visual">
+                    <div class="calc-hero-image-wrap">
+                        <img src="../assets/calc.png" alt="Financial calculators illustration" class="calc-hero-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CALCULATOR SECTIONS ================= -->
+        <div class="tools-sections">
+
+            <section class="tools-section" aria-labelledby="popular-tools-title">
+                <h2 class="tools-section-title" id="popular-tools-title">Popular Tools</h2>
+                <div class="calculator-grid">
+                    <div class="calc-card calc-sip">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="trending-up"></i></span><span>SIP Calculator</span></h3>
+                        <p>Future value of SIP</p>
+                        <div class="compare-toggle-row">
+                            <label class="compare-switch" for="sipCompareToggle">
+                                <input id="sipCompareToggle" type="checkbox">
+                                <span>Compare Mode</span>
+                            </label>
+                        </div>
+                        <input id="sipAmount" type="number" placeholder="Monthly Investment (Rs)" value="5000">
+                        <input id="sipRate" type="number" placeholder="Return Rate (%)" value="12">
+                        <input id="sipYears" type="number" placeholder="Years" value="20">
+                        <div class="compare-fields" id="sipCompareFields" aria-hidden="true">
+                            <h4 class="compare-subtitle">Scenario B</h4>
+                            <input id="sipAmountB" type="number" placeholder="Monthly Investment (Rs)" value="10000">
+                            <input id="sipRateB" type="number" placeholder="Return Rate (%)" value="12">
+                            <input id="sipYearsB" type="number" placeholder="Years" value="20">
+                        </div>
+                        <button class="btn small" onclick="calcSIP()">Calculate</button>
+                        <div class="calc-output" id="sipResult"></div>
+                        <div class="chart-wrap" id="sipChartWrap" aria-live="polite"><canvas id="sipChart"></canvas></div>
+                        <div class="compare-result-wrap" id="sipCompareResultWrap" aria-live="polite">
+                            <div class="compare-results" id="sipCompareResults"></div>
+                            <div class="chart-wrap compare-chart-wrap is-visible" id="sipCompareChartWrap"><canvas id="sipCompareChart"></canvas></div>
+                        </div>
+                    </div>
+
+                    <div class="calc-card calc-retirement">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="user"></i></span><span>Retirement Calculator</span></h3>
+                        <p>Required retirement corpus</p>
+                        <input id="retExpense" type="number" placeholder="Monthly Expense (Rs)">
+                        <input id="retYears" type="number" placeholder="Years After Retirement">
+                        <button class="btn small" onclick="calcRetirement()">Calculate</button>
+                        <div class="calc-output" id="retResult"></div>
+                    </div>
+
+                    <div class="calc-card calc-goal">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="target"></i></span><span>Goal Planner Calculator</span></h3>
+                        <p>Monthly amount needed for a target corpus</p>
+                        <input id="goalTarget" type="number" placeholder="Target Amount (Rs)">
+                        <input id="goalYears" type="number" placeholder="Years">
+                        <input id="goalReturn" type="number" placeholder="Expected Return (%)">
+                        <button class="btn small" onclick="calcGoalPlanner()">Calculate</button>
+                        <div class="calc-output" id="goalResult"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tools-section" aria-labelledby="investment-tools-title">
+                <h2 class="tools-section-title" id="investment-tools-title">Investment Tools</h2>
+                <div class="calculator-grid">
+                    <div class="calc-card calc-lumpsum">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="wallet"></i></span><span>Lumpsum Calculator</span></h3>
+                        <p>One-time investment growth</p>
+                        <input id="lumAmount" type="number" placeholder="Investment (Rs)">
+                        <input id="lumRate" type="number" placeholder="Return Rate (%)">
+                        <input id="lumYears" type="number" placeholder="Years">
+                        <button class="btn small" onclick="calcLumpsum()">Calculate</button>
+                        <div class="calc-output" id="lumResult"></div>
+                        <div class="chart-wrap" id="lumChartWrap" aria-live="polite"><canvas id="lumChart"></canvas></div>
+                    </div>
+
+                    <div class="calc-card calc-stepup">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="trending-up"></i></span><span>Step-Up SIP Calculator</span></h3>
+                        <p>SIP growth with annual contribution increase</p>
+                        <input id="stepSipAmount" type="number" placeholder="Monthly SIP (Rs)">
+                        <input id="stepSipIncrease" type="number" placeholder="Annual Increase (%)">
+                        <input id="stepSipRate" type="number" placeholder="Return Rate (%)">
+                        <input id="stepSipYears" type="number" placeholder="Years">
+                        <button class="btn small" onclick="calcStepUpSIP()">Calculate</button>
+                        <div class="calc-output" id="stepSipResult"></div>
+                    </div>
+
+                    <div class="calc-card calc-cagr">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="bar-chart-2"></i></span><span>CAGR Calculator</span></h3>
+                        <p>Annualized growth</p>
+                        <input id="cagrStart" type="number" placeholder="Start Value (Rs)">
+                        <input id="cagrEnd" type="number" placeholder="End Value (Rs)">
+                        <input id="cagrYears" type="number" placeholder="Years">
+                        <button class="btn small" onclick="calcCAGR()">Calculate</button>
+                        <div class="calc-output" id="cagrResult"></div>
+                    </div>
+
+                    <div class="calc-card calc-roi">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="bar-chart-3"></i></span><span>ROI Calculator</span></h3>
+                        <p>Return on investment</p>
+                        <input id="roiCost" type="number" placeholder="Investment Cost (Rs)">
+                        <input id="roiValue" type="number" placeholder="Final Value (Rs)">
+                        <button class="btn small" onclick="calcROI()">Calculate</button>
+                        <div class="calc-output" id="roiResult"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tools-section" aria-labelledby="loan-tools-title">
+                <h2 class="tools-section-title" id="loan-tools-title">Loan Tools</h2>
+                <div class="calculator-grid">
+                    <div class="calc-card calc-emi">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="landmark"></i></span><span>EMI Calculator</span></h3>
+                        <p>Monthly loan repayment</p>
+                        <input id="emiAmount" type="number" placeholder="Loan Amount (Rs)" value="500000">
+                        <input id="emiRate" type="number" placeholder="Interest Rate (%)" value="8">
+                        <input id="emiYears" type="number" placeholder="Tenure (Years)" value="5">
+                        <button class="btn small" onclick="calcEMI()">Calculate</button>
+                        <div class="calc-output" id="emiResult"></div>
+                        <div class="chart-wrap" id="emiChartWrap" aria-live="polite"><canvas id="emiChart"></canvas></div>
+                    </div>
+
+                    <div class="calc-card calc-loan-eligibility">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="hand-coins"></i></span><span>Loan Eligibility Calculator</span></h3>
+                        <p>Estimate maximum eligible loan amount</p>
+                        <input id="loanInc" type="number" placeholder="Monthly Income (Rs)">
+                        <input id="loanEmis" type="number" placeholder="Existing EMIs (Rs)">
+                        <input id="loanRate" type="number" placeholder="Interest Rate (%)">
+                        <input id="loanTenure" type="number" placeholder="Loan Tenure (Years)">
+                        <button class="btn small" onclick="calcLoanEligibility()">Calculate</button>
+                        <div class="calc-output" id="loanEligResult"></div>
+                    </div>
+
+                    <div class="calc-card calc-loan-prepay">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="banknote"></i></span><span>Loan Prepayment Calculator</span></h3>
+                        <p>See tenure reduction with extra monthly payment</p>
+                        <input id="preLoanAmount" type="number" placeholder="Loan Amount (Rs)">
+                        <input id="preLoanRate" type="number" placeholder="Interest Rate (%)">
+                        <input id="preLoanYears" type="number" placeholder="Tenure (Years)">
+                        <input id="preExtraPay" type="number" placeholder="Extra Monthly Payment (Rs)">
+                        <button class="btn small" onclick="calcLoanPrepayment()">Calculate</button>
+                        <div class="calc-output" id="prepayResult"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tools-section" aria-labelledby="tax-tools-title">
+                <h2 class="tools-section-title" id="tax-tools-title">Tax Tools</h2>
+                <div class="calculator-grid">
+                    <div class="calc-card calc-tax">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="file-text"></i></span><span>Income Tax Calculator</span></h3>
+                        <p>Simple Indian tax estimate</p>
+                        <input id="taxIncome" type="number" placeholder="Annual Income (Rs)">
+                        <input id="taxDeduction" type="number" placeholder="Deductions (Rs)">
+                        <button class="btn small" onclick="calcTax()">Calculate</button>
+                        <div class="calc-output" id="taxResult"></div>
+                    </div>
+
+                    <div class="calc-card calc-capital-gains">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="scale"></i></span><span>Capital Gains Calculator</span></h3>
+                        <p>Estimate gain and tax impact from asset sale</p>
+                        <input id="cgBuyPrice" type="number" placeholder="Buy Price (Rs)">
+                        <input id="cgSellPrice" type="number" placeholder="Sell Price (Rs)">
+                        <input id="cgQty" type="number" placeholder="Quantity">
+                        <input id="cgHold" type="number" placeholder="Holding Period (Months)">
+                        <button class="btn small" onclick="calcCapitalGains()">Calculate</button>
+                        <div class="calc-output" id="cgResult"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tools-section" aria-labelledby="planning-tools-title">
+                <h2 class="tools-section-title" id="planning-tools-title">Planning Tools</h2>
+                <div class="calculator-grid">
+                    <div class="calc-card calc-inflation">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="trending-up"></i></span><span>Inflation Calculator</span></h3>
+                        <p>Future value of money</p>
+                        <input id="infValue" type="number" placeholder="Today's Value (Rs)">
+                        <input id="infRate" type="number" placeholder="Inflation Rate (%)">
+                        <input id="infYears" type="number" placeholder="Years">
+                        <button class="btn small" onclick="calcInflation()">Calculate</button>
+                        <div class="calc-output" id="infResult"></div>
+                    </div>
+
+                    <div class="calc-card calc-net-worth">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="scale"></i></span><span>Net Worth Calculator</span></h3>
+                        <p>Assets minus liabilities snapshot</p>
+                        <input id="nwAssets" type="number" placeholder="Total Assets (Rs)">
+                        <input id="nwLiabilities" type="number" placeholder="Total Liabilities (Rs)">
+                        <button class="btn small" onclick="calcNetWorth()">Calculate</button>
+                        <div class="calc-output" id="nwResult"></div>
+                    </div>
+
+                    <div class="calc-card calc-emergency-fund">
+                        <h3 class="calc-title"><span class="calc-icon" aria-hidden="true"><i data-lucide="shield-check"></i></span><span>Emergency Fund Calculator</span></h3>
+                        <p>Estimate reserve needed for income disruptions</p>
+                        <input id="efExpense" type="number" placeholder="Monthly Expenses (Rs)">
+                        <input id="efMonths" type="number" placeholder="Months of Coverage">
+                        <button class="btn small" onclick="calcEmergencyFund()">Calculate</button>
+                        <div class="calc-output" id="efResult"></div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer" role="contentinfo">
+        <div class="container footer-shell">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo" aria-label="FinEdu Home">
+                        <span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span>
+                    </a>
+                    <p>FinEdu helps Indian learners build financial clarity through practical education, smarter tools, and timely market context.</p>
+                    <div class="footer-social" aria-label="FinEdu quick links">
+                        <a href="./courses.html">Courses</a>
+                        <a href="./news.html">News</a>
+                        <a href="./seminars.html">Seminars</a>
+                        <a href="../contact.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <nav class="footer-column" aria-label="Platform links">
+                        <h3>Platform</h3>
+                        <ul>
+                            <li><a href="./screener.html">Screener</a></li>
+                            <li><a href="./tools.html">Tools</a></li>
+                            <li><a href="./courses.html">Courses</a></li>
+                            <li><a href="../index.html">AI Assistant</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="footer-column" aria-label="Resources links">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="./learning.html">Learning</a></li>
+                            <li><a href="./news.html">Market News</a></li>
+                            <li><a href="./seminars.html">Seminars</a></li>
+                            <li><a href="../contact.html">Support</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="footer-column" aria-label="Company links">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="../index.html">About FinEdu</a></li>
+                            <li><a href="./auth.html">Get Started</a></li>
+                            <li><a href="../contact.html">Contact</a></li>
+                            <li><a href="../privacy.html">Privacy</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom-row">
+                <p class="footer-bottom">&copy; 2025 FinEdu. All rights reserved.</p>
+                <nav class="footer-legal-nav" aria-label="Footer legal navigation">
+                    <a href="../privacy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../contact.html">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= PAGE JS ================= -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/min/pages/tools.js"></script>
+    <script src="../js/min/app.js"></script>
+    <script>
+        if (window.lucide && typeof window.lucide.createIcons === "function") {
+            window.lucide.createIcons();
+        }
+    </script>
+
+</body>
+
+</html>

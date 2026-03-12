@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinEd – Financial News</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/pages/news.css" />
+
+    <link rel="stylesheet" href="../css/pages/chatbot.css" />
+</head>
+
+<body class="page-news">
+    <!--
+      File Map (News):
+      1) Header/Nav
+      2) News list container
+      3) Footer
+      4) /pages/news.js handles fetch/render/refresh
+    -->
+
+    <!-- ================= HEADER / NAVBAR ================= -->
+    <header class="header" role="banner">
+    <div class="nav container">
+        <a href="../index.html" class="logo" aria-label="FinEdu Home"><span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span></a>
+
+        <nav class="nav-links" aria-label="Main Navigation">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="./screener.html">Screener</a></li>
+                <li><a href="./tools.html">Tools</a></li>
+                <li><a href="./courses.html">Courses</a></li>
+                <li><a href="./learning.html">Learning</a></li>
+                <li><a href="./seminars.html">Seminars</a></li>
+                <li><a href="./news.html" class="active">News</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="page-enter">
+
+        <section class="finance-news">
+
+            <div class="news-header">
+                <h1>Indian Financial News</h1>
+                <p id="last-updated">Updating...</p>
+                <p id="refresh-countdown">Next refresh in --</p>
+            </div>
+
+            <section class="trending-news" aria-label="Trending News">
+                <div class="section-heading-row">
+                    <h2>Trending News</h2>
+                    <span class="trending-hint">Most recent and high impact</span>
+                </div>
+                <div id="trending-container" class="trending-grid">
+                    <!-- Dynamic trending cards load here -->
+                </div>
+            </section>
+
+            <section class="news-filters" aria-label="News Filters">
+                <button type="button" class="news-filter-btn active" data-filter="All">All</button>
+                <button type="button" class="news-filter-btn" data-filter="Banking">Banking</button>
+                <button type="button" class="news-filter-btn" data-filter="Markets">Markets</button>
+                <button type="button" class="news-filter-btn" data-filter="Crypto">Crypto</button>
+                <button type="button" class="news-filter-btn" data-filter="Commodities">Commodities</button>
+                <button type="button" class="news-filter-btn" data-filter="Global">Global</button>
+            </section>
+
+            <div class="section-heading-row all-news-row">
+                <h2>All News</h2>
+                <span id="news-count" class="news-count"></span>
+            </div>
+
+            <div id="news-container" class="news-grid">
+                <!-- Dynamic news cards load here -->
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer" role="contentinfo">
+        <div class="container footer-shell">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo" aria-label="FinEdu Home">
+                        <span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span>
+                    </a>
+                    <p>FinEdu helps Indian learners build financial clarity through practical education, smarter tools, and timely market context.</p>
+                    <div class="footer-social" aria-label="FinEdu quick links">
+                        <a href="./courses.html">Courses</a>
+                        <a href="./news.html">News</a>
+                        <a href="./seminars.html">Seminars</a>
+                        <a href="../contact.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <nav class="footer-column" aria-label="Platform links">
+                        <h3>Platform</h3>
+                        <ul>
+                            <li><a href="./screener.html">Screener</a></li>
+                            <li><a href="./tools.html">Tools</a></li>
+                            <li><a href="./courses.html">Courses</a></li>
+                            <li><a href="../index.html">AI Assistant</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="footer-column" aria-label="Resources links">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="./learning.html">Learning</a></li>
+                            <li><a href="./news.html">Market News</a></li>
+                            <li><a href="./seminars.html">Seminars</a></li>
+                            <li><a href="../contact.html">Support</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="footer-column" aria-label="Company links">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="../index.html">About FinEdu</a></li>
+                            <li><a href="./auth.html">Get Started</a></li>
+                            <li><a href="../contact.html">Contact</a></li>
+                            <li><a href="../privacy.html">Privacy</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom-row">
+                <p class="footer-bottom">&copy; 2025 FinEdu. All rights reserved.</p>
+                <nav class="footer-legal-nav" aria-label="Footer legal navigation">
+                    <a href="../privacy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../contact.html">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Page Script -->
+    <script src="../js/min/pages/news.js"></script>
+    <script src="../js/min/app.js"></script>
+
+</body>
+
+</html>

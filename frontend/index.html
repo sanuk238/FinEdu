@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- ================= META ================= -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>FinEdu - Unified Financial Education Platform</title>
+    <meta name="description"
+        content="FinEdu is a unified financial education platform offering AI assistance, stock screening, structured courses, calculators, live sessions, and market news for Indian investors." />
+    <meta name="theme-color" content="#4f46e5" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="FinEdu - Unified Financial Education Platform" />
+    <meta property="og:description"
+        content="AI assistant, stock screener, courses, tools, and expert sessions - all in one place." />
+    <meta property="og:type" content="website" />
+
+<!-- Fonts Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/pages/home.css" />
+    <link rel="stylesheet" href="./css/pages/chatbot.css" />
+</head>
+
+<body class="page-home">
+    <!--
+      File Map (Home):
+      1) Header/Nav
+      2) Hero Sections 1-3
+      3) Feature Overview Grid
+      4) Footer
+    Note: Home page specific styles are in css/pages/home.css.
+    -->
+
+    <!-- ================= HEADER ================= -->
+    <header class="header" role="banner">
+        <div class="nav container">
+
+            <!-- Logo -->
+            <a href="./index.html" class="logo" aria-label="FinEdu Home">
+                <span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span>
+            </a>
+
+            <!-- Navigation -->
+            <nav class="nav-links" aria-label="Main Navigation">
+                <ul>
+                    <li><a href="./index.html" class="active">Home</a></li>
+                    <li><a href="./pages/screener.html">Screener</a></li>
+                    <li><a href="./pages/tools.html">Tools</a></li>
+                    <li><a href="./pages/courses.html">Courses</a></li>
+                    <li><a href="./pages/learning.html">Learning</a></li>
+                    <li><a href="./pages/seminars.html">Seminars</a></li>
+                    <li><a href="./pages/news.html">News</a></li>
+                </ul>
+            </nav>
+
+<!-- CTA -->
+<a href="./pages/auth.html" class="btn small">Get Started</a>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main id="main-content">
+        <section class="home-hero">
+            <div class="hero-bg-shapes">
+                <div class="hero-shape shape-1"></div>
+                <div class="hero-shape shape-2"></div>
+                <div class="hero-shape shape-3"></div>
+            </div>
+            <div class="container home-hero-grid">
+                <div class="home-hero-copy">
+                    <h1>Master Your <span class="text-gradient">Financial Future</span></h1>
+                    <p class="hero-tagline">Learn investing with AI-powered tools, stock screeners, and comprehensive financial courses designed for Indian investors.</p>
+                    <p class="supporting-text">Join India's fastest-growing financial education platform</p>
+<div class="hero-buttons">
+                        <a href="javascript:void(0)" class="btn btn-primary open-chat-popup">Start Learning Free</a>
+                        <a href="./pages/tools.html" class="btn btn-secondary">Explore Tools</a>
+                    </div>
+                    <!-- Trust Stats Row -->
+                    <div class="hero-trust-stats">
+                        <div class="trust-stat">
+                            <div class="trust-stat-icon">👥</div>
+                            <div class="trust-stat-content">
+                                <strong>10,000+</strong>
+                                <span>Learners</span>
+                            </div>
+                        </div>
+                        <div class="trust-stat">
+                            <div class="trust-stat-icon">📚</div>
+                            <div class="trust-stat-content">
+                                <strong>50+</strong>
+                                <span>Lessons</span>
+                            </div>
+                        </div>
+                        <div class="trust-stat">
+                            <div class="trust-stat-icon">⭐</div>
+                            <div class="trust-stat-content">
+                                <strong>4.9★</strong>
+                                <span>Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="home-hero-visual">
+                    <div class="hero-image-wrapper">
+                        <img src="./assets/financial Education.png" alt="Financial Education Platform - Learn Investing & Personal Finance" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-dashboard-hero" aria-label="FinEdu dashboard highlights">
+            <div class="container home-dashboard-grid">
+                <div class="home-dashboard-visual">
+                    <div class="dashboard-image-wrapper">
+                        <img src="./assets/dash.png" alt="FinEdu market dashboard with charts and market analytics" loading="lazy" decoding="async" />
+                    </div>
+                </div>
+                <div class="home-dashboard-copy">
+                    <h2>Powerful Market Dashboard</h2>
+                    <p class="dashboard-description">Analyze stocks with interactive charts, peer comparisons, and real-time metrics. FinEdu provides a professional trading-style dashboard designed for Indian investors.</p>
+                    <ul class="dashboard-feature-points" aria-label="Dashboard features">
+                        <li>Interactive TradingView charts</li>
+                        <li>Peer comparison and financial metrics</li>
+                        <li>Real-time market insights</li>
+                    </ul>
+                    <div class="dashboard-trust-stats" aria-label="Dashboard platform stats">
+                        <div class="dashboard-stat-item">
+                            <strong>10K+</strong>
+                            <span>Investors learning</span>
+                        </div>
+                        <div class="dashboard-stat-item">
+                            <strong>50+</strong>
+                            <span>Financial tools</span>
+                        </div>
+                        <div class="dashboard-stat-item">
+                            <strong>24/7</strong>
+                            <span>AI-powered assistance</span>
+                        </div>
+                    </div>
+                    <a href="./pages/screener.html" class="btn btn-primary">Explore Market Tools</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-feature-strip" aria-label="Platform highlights">
+            <div class="container strip-row">
+                <p>AI Learning</p>
+                <span>*</span>
+                <p>Stock Screeners</p>
+                <span>*</span>
+                <p>Finance Courses</p>
+                <span>*</span>
+                <p>Seamless Integration</p>
+                <span>*</span>
+                <p>Cross Platform Access</p>
+            </div>
+        </section>
+
+        <!-- ================= FEATURES SECTION ================= -->
+        <section class="home-features" aria-label="Platform features">
+            <div class="container">
+                <div class="home-features-header">
+                    <h2>Everything You Need to Master Finance</h2>
+                    <p>Comprehensive tools and resources designed to make investing accessible, understandable, and profitable.</p>
+                </div>
+                <div class="home-features-grid">
+                    <article class="feature-card-v2">
+                        <div class="feature-image-v2">
+                            <img src="./assets/10088.jpg" alt="AI Assistant" loading="lazy" decoding="async" />
+                        </div>
+                        <h3>AI Assistant</h3>
+                        <p>Get instant answers to your finance questions with our AI-powered assistant. Personalized guidance available 24/7.</p>
+                        <a href="javascript:void(0)" class="feature-link open-chat-popup">Explore AI →</a>
+                    </article>
+                    <article class="feature-card-v2">
+                        <div class="feature-image-v2">
+                            <img src="./assets/screener.png" alt="Stock Screener" loading="lazy" decoding="async" />
+                        </div>
+                        <h3>Stock Screener</h3>
+                        <p>Filter and find the best stocks based on your criteria. Make data-driven investment decisions with ease.</p>
+                        <a href="./pages/screener.html" class="feature-link">Use Screener →</a>
+                    </article>
+                    <article class="feature-card-v2">
+                        <div class="feature-image-v2">
+                            <img src="./assets/courses.png" alt="Structured Courses" />
+                        </div>
+                        <h3>Structured Courses</h3>
+                        <p>Learn from beginner to advanced with our curated curriculum. Build practical skills step by step.</p>
+                        <a href="./pages/courses.html" class="feature-link">View Courses →</a>
+                    </article>
+                    <article class="feature-card-v2">
+                        <div class="feature-image-v2">
+                            <img src="./assets/course.jpg" alt="Learning Paths" loading="lazy" decoding="async" />
+                        </div>
+                        <h3>Learning Paths</h3>
+                        <p>Follow structured learning paths designed by experts. Track your progress as you grow.</p>
+                        <a href="./pages/learning.html" class="feature-link">Start Learning →</a>
+                    </article>
+                    <article class="feature-card-v2">
+                        <div class="feature-image-v2">
+                            <img src="./assets/tools.png" alt="Tools & Calculators" loading="lazy" decoding="async" />
+                        </div>
+                        <h3>Tools & Calculators</h3>
+                        <p>Powerful calculators to plan your investments, calculate returns, and manage risk effectively.</p>
+                        <a href="./pages/tools.html" class="feature-link">Explore Tools →</a>
+                    </article>
+                    <article class="feature-card-v2">
+                        <div class="feature-image-v2">
+                            <img src="./assets/5064125.jpg" alt="Live Seminars" loading="lazy" decoding="async" />
+                        </div>
+                        <h3>Live Seminars</h3>
+                        <p>Join live sessions with industry experts. Get your questions answered in real-time.</p>
+                        <a href="./pages/seminars.html" class="feature-link">Join Seminars →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TESTIMONIALS SECTION ================= -->
+        <section class="home-testimonials" aria-label="What learners say">
+            <div class="container">
+                <div class="home-testimonials-header">
+                    <h2>What Our Learners Say</h2>
+                    <p>Join thousands of satisfied students who transformed their financial future.</p>
+                </div>
+                <div class="home-testimonials-grid">
+                    <article class="testimonial-card-v2">
+                        <div class="testimonial-rating">★★★★★</div>
+                        <p class="testimonial-text">"FinEdu helped me understand investing from scratch. The courses are well-structured and the AI assistant answers all my questions instantly!"</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">RK</div>
+                            <div class="testimonial-info">
+                                <strong>Rajesh Kumar</strong>
+                                <span>Software Engineer</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="testimonial-card-v2">
+                        <div class="testimonial-rating">★★★★★</div>
+                        <p class="testimonial-text">"The stock screener is a game-changer. I found quality stocks that match my investment criteria within minutes. Highly recommended!"</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">SM</div>
+                            <div class="testimonial-info">
+                                <strong>Sofia Menon</strong>
+                                <span>Business Analyst</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="testimonial-card-v2">
+                        <div class="testimonial-rating">★★★★★</div>
+                        <p class="testimonial-text">"The live seminars with industry experts are invaluable. I learned more in 3 sessions than I did in months of self-study."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">AP</div>
+                            <div class="testimonial-info">
+                                <strong>Amit Patel</strong>
+                                <span>Financial Planner</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CTA SECTION ================= -->
+        <section class="home-cta" aria-label="Call to action">
+            <div class="container">
+                <div class="home-cta-content">
+                    <h2>Start Your Financial Journey Today</h2>
+                    <p>Join thousands of learners who are building their financial future with FinEdu. Get started for free!</p>
+<div class="home-cta-actions">
+<a href="./pages/auth.html" class="btn large cta-primary-btn">Get Started Free</a>
+                        <a href="./pages/courses.html" class="btn large cta-secondary-btn">Explore Courses</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= FLOATING CHAT BUTTON ================= -->
+    <button class="floating-chat-btn" aria-label="Open AI Assistant">
+        <img src="./assets/ai svg.png" alt="AI Assistant" />
+    </button>
+
+    <!-- ================= CHAT POPUP ================= -->
+    <div class="chat-popup">
+        <div class="chat-popup-header">
+            <div class="chat-header-info">
+                <div class="chat-header-avatar" aria-hidden="true">
+                    <img src="./assets/ai svg.png" alt="" />
+                </div>
+                <div class="chat-header-copy">
+                    <h2>FinEdu Assistant</h2>
+                    <p>AI Financial Guide</p>
+                </div>
+            </div>
+            <button class="close-chat-btn" aria-label="Close AI Assistant">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="chat-app">
+            <div id="welcomeScreen" class="welcome-screen">
+                <div class="welcome-stack">
+                    <div class="welcome-bot-row">
+                        <div class="welcome-avatar welcome-icon" aria-hidden="true">
+                            <img src="./assets/ai svg.png" alt="" />
+                        </div>
+                        <div class="welcome-bubble">
+                            <p>Welcome 👋</p>
+                            <p>How can I help you today?</p>
+                        </div>
+                    </div>
+
+                    <div id="suggestionCards" class="suggestion-chips" aria-label="Quick suggestions">
+                        <button class="suggestion-card" data-prompt="Learn investing basics">Learn investing basics</button>
+                        <button class="suggestion-card" data-prompt="Calculate EMI">Calculate EMI</button>
+                        <button class="suggestion-card" data-prompt="Understand SIP">Understand SIP</button>
+                        <button class="suggestion-card" data-prompt="Plan retirement">Plan retirement</button>
+                        <button class="suggestion-card" data-prompt="Ask about stock market">Ask about stock market</button>
+                    </div>
+                </div>
+            </div>
+            <div id="chatMessages" class="chat-messages"></div>
+            <div class="chat-composer">
+                <div class="chat-actions">
+                    <button class="chat-action-btn" id="helpBtn">📞 Support</button>
+                    <button class="chat-action-btn" id="newChatBtn">🔄 New Chat</button>
+                </div>
+                <form id="chatForm" class="chat-input-wrapper">
+                    <textarea id="chatInput" placeholder="Ask about finance, investing, or planning..." rows="1"></textarea>
+                    <button type="submit" class="send-btn" disabled="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </form>
+                <p class="chat-disclaimer">FinEdu AI provides educational guidance only and not financial advice.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer" role="contentinfo">
+        <div class="container footer-shell">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="./index.html" class="footer-logo" aria-label="FinEdu Home">
+                        <span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span>
+                    </a>
+                    <p>FinEdu helps Indian learners build financial clarity through practical education, smarter tools, and timely market context.</p>
+                    <div class="footer-social" aria-label="FinEdu quick links">
+                        <a href="./pages/courses.html">Courses</a>
+                        <a href="./pages/news.html">News</a>
+                        <a href="./pages/seminars.html">Seminars</a>
+                        <a href="./contact.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <nav class="footer-column" aria-label="Platform links">
+                        <h3>Platform</h3>
+                        <ul>
+                            <li><a href="./pages/screener.html">Screener</a></li>
+                            <li><a href="./pages/tools.html">Tools</a></li>
+                            <li><a href="./pages/courses.html">Courses</a></li>
+                            <li><a href="./index.html">AI Assistant</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="footer-column" aria-label="Resources links">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="./pages/learning.html">Learning</a></li>
+                            <li><a href="./pages/news.html">Market News</a></li>
+                            <li><a href="./pages/seminars.html">Seminars</a></li>
+                            <li><a href="./contact.html">Support</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="footer-column" aria-label="Company links">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="./index.html">About FinEdu</a></li>
+                            <li><a href="./pages/auth.html">Get Started</a></li>
+                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="./privacy.html">Privacy</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom-row">
+                <p class="footer-bottom">&copy; 2025 FinEdu. All rights reserved.</p>
+                <nav class="footer-legal-nav" aria-label="Footer legal navigation">
+                    <a href="./privacy.html">Privacy Policy</a>
+                    <a href="./terms.html">Terms of Service</a>
+                    <a href="./contact.html">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./js/min/app.js" defer></script>
+    <script src="./js/min/pages/ai.js" defer></script>
+
+</body>
+
+</html>

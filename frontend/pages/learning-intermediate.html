@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinEdu - Learning Intermediate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/pages/learning-intermediate.css" />
+    <link rel="stylesheet" href="../css/pages/chatbot.css" />
+</head>
+
+<body class="page-learning">
+    <header class="header" role="banner">
+        <div class="nav container">
+            <a href="../index.html" class="logo" aria-label="FinEdu Home"><span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span></a>
+            <nav class="nav-links" aria-label="Main Navigation">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="./screener.html">Screener</a></li>
+                    <li><a href="./tools.html">Tools</a></li>
+                    <li><a href="./courses.html">Courses</a></li>
+                    <li><a href="./learning.html" class="active">Learning</a></li>
+                    <li><a href="./seminars.html">Seminars</a></li>
+                    <li><a href="./news.html">News</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="learning-main" class="learn3-main">
+        <section class="container learn3-levels">
+            <a class="learn3-level-card" href="./learning.html">
+                <span>📘 Level 1</span>
+                <h3>Basic</h3>
+                <p>Budgeting, savings, loans, taxes, insurance</p>
+            </a>
+            <a class="learn3-level-card active" href="./learning-intermediate.html">
+                <span>📈 Level 2</span>
+                <h3>Intermediate</h3>
+                <p>Investments, risk, SIPs, retirement planning</p>
+            </a>
+            <a class="learn3-level-card" href="./learning-advanced.html">
+                <span>🧠 Level 3</span>
+                <h3>Advanced</h3>
+                <p>Portfolio strategy, tax optimization, behavior</p>
+            </a>
+        </section>
+
+        <section class="container learn3-topics">
+            <div class="learn3-basic-head">
+                <h2>Intermediate Level Chapters</h2>
+                <p>Click any chapter to load detailed theory, application context, and quiz.</p>
+            </div>
+            <div class="learn3-progress" aria-live="polite">
+                <div class="learn3-progress-head">
+                    <h3>Learning Progress</h3>
+                    <span id="learn3-progress-percent">0%</span>
+                </div>
+                <div class="learn3-progress-track" role="progressbar" aria-label="Chapter completion progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <span id="learn3-progress-fill" class="learn3-progress-fill"></span>
+                </div>
+                <p id="learn3-progress-text" class="learn3-progress-text">0 of 5 Chapters Completed</p>
+            </div>
+            <div class="learn3-topic-grid" id="learn3-topic-grid"></div>
+        </section>
+
+        <section class="container learn3-theory" id="learn3-theory">
+            <div class="learn3-chapter-stage">
+                <div class="learn3-chapter-theory">
+                    <p class="learn3-kicker" id="learn3-kicker">Intermediate Level</p>
+                    <h2 id="learn3-theory-title">Investment Fundamentals</h2>
+                    <div id="learn3-theory-body" class="learn3-theory-body"></div>
+                    <div class="learn3-learning-sections" aria-label="Structured learning sections">
+                        <section class="learn3-learn-block">
+                            <h4>Key Takeaways</h4>
+                            <ul id="learn3-key-takeaways"></ul>
+                        </section>
+                        <section class="learn3-learn-block learn3-tip-block">
+                            <h4>💡 Financial Tip</h4>
+                            <p id="learn3-financial-tip"></p>
+                        </section>
+                        <section class="learn3-learn-block learn3-example-block">
+                            <h4>Example</h4>
+                            <p id="learn3-example-text"></p>
+                        </section>
+                    </div>
+                    <h4>Best Practices</h4>
+                    <ul id="learn3-best-practices"></ul>
+                    <section class="learn3-related-tools" aria-labelledby="learn3-related-tools-title">
+                        <h4 id="learn3-related-tools-title">Related Tools</h4>
+                        <div id="learn3-related-tools-list" class="learn3-related-tools-list"></div>
+                    </section>
+                    <div class="learn3-lesson-nav" aria-label="Lesson navigation">
+                        <button type="button" class="btn secondary" id="learn3-prev-chapter">← Previous Chapter</button>
+                        <button type="button" class="btn primary" id="learn3-next-chapter">Next Chapter →</button>
+                    </div>
+                </div>
+                <div class="learn3-chapter-interactive">
+                    <h3>Chapter Practice</h3>
+                    <div class="learn3-video-frame">
+                        <div class="learn3-play-btn"></div>
+                        <p id="learn3-video-label">Lesson Video: Investment Fundamentals</p>
+                    </div>
+                    <div class="learn3-video-features">
+                        <span>Simple English</span>
+                        <span>Practical examples</span>
+                        <span>Concept + application</span>
+                    </div>
+
+                    <div class="learn3-quiz-panel">
+                        <h3 id="learn3-quiz-title">Chapter Quiz</h3>
+                        <p id="learn3-quiz-meta" class="learn3-quiz-meta"></p>
+                        <form id="learn3-quiz-form" class="learn3-quiz-form"></form>
+                        <div class="learn3-quiz-actions">
+                            <button type="button" class="btn primary" id="learn3-submit-quiz">Check Answers</button>
+                        </div>
+                        <p id="learn3-quiz-result" class="learn3-quiz-result" aria-live="polite"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container footer-shell">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo" aria-label="FinEdu Home">
+                        <span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span>
+                    </a>
+                    <p>FinEdu helps Indian learners build financial clarity through practical education, smarter tools, and timely market context.</p>
+                    <div class="footer-social" aria-label="FinEdu quick links">
+                        <a href="./courses.html">Courses</a>
+                        <a href="./news.html">News</a>
+                        <a href="./seminars.html">Seminars</a>
+                        <a href="../contact.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <nav class="footer-column" aria-label="Platform links">
+                        <h3>Platform</h3>
+                        <ul>
+                            <li><a href="./screener.html">Screener</a></li>
+                            <li><a href="./tools.html">Tools</a></li>
+                            <li><a href="./courses.html">Courses</a></li>
+                            <li><a href="../index.html">AI Assistant</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="footer-column" aria-label="Resources links">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="./learning.html">Learning</a></li>
+                            <li><a href="./news.html">Market News</a></li>
+                            <li><a href="./seminars.html">Seminars</a></li>
+                            <li><a href="../contact.html">Support</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="footer-column" aria-label="Company links">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="../index.html">About FinEdu</a></li>
+                            <li><a href="./auth.html">Get Started</a></li>
+                            <li><a href="../contact.html">Contact</a></li>
+                            <li><a href="../privacy.html">Privacy</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom-row">
+                <p class="footer-bottom">&copy; 2025 FinEdu. All rights reserved.</p>
+                <nav class="footer-legal-nav" aria-label="Footer legal navigation">
+                    <a href="../privacy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../contact.html">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/min/pages/learning-intermediate.js" defer></script>
+    <script src="../js/min/app.js" defer></script>
+</body>
+
+</html>

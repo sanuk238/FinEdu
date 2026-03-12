@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinEdu - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/pages/auth.css" />
+    <link rel="stylesheet" href="../css/pages/chatbot.css" />
+</head>
+<body class="page-auth">
+    <header class="header" role="banner">
+        <div class="nav container">
+            <a href="../index.html" class="logo" aria-label="FinEdu Home"><span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span></a>
+            <nav class="nav-links" aria-label="Main Navigation">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="./screener.html">Screener</a></li>
+                    <li><a href="./tools.html">Tools</a></li>
+                    <li><a href="./courses.html">Courses</a></li>
+                    <li><a href="./learning.html">Learning</a></li>
+                    <li><a href="./seminars.html">Seminars</a></li>
+                    <li><a href="./news.html">News</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="auth-main">
+        <section class="auth-shell" aria-label="Authentication">
+            <div class="auth-left">
+                <div class="auth-card">
+                    <a href="../index.html" class="auth-brand" aria-label="FinEdu Home">
+                        <span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span>
+                    </a>
+
+                    <div class="auth-head">
+                        <h1 id="authTitle">Sign In</h1>
+                        <p id="authSubtitle">Welcome back! Please enter your details</p>
+                    </div>
+
+                    <form id="authForm" class="auth-form" onsubmit="return false;" aria-label="Authentication form">
+                        <div id="authNameField" class="auth-field auth-hidden">
+                            <label for="authName">Full Name</label>
+                            <input id="authName" type="text" placeholder="Enter your full name" />
+                        </div>
+
+                        <div class="auth-field">
+                            <label for="authEmail">Email</label>
+                            <input id="authEmail" type="email" placeholder="Enter your email" />
+                        </div>
+
+                        <div class="auth-field">
+                            <label for="authPassword">Password</label>
+                            <div class="auth-password-wrap">
+                                <input id="authPassword" type="password" placeholder="Enter your password" />
+                                <button type="button" id="authPasswordToggle" class="auth-password-toggle" aria-label="Show password">👁</button>
+                            </div>
+                        </div>
+
+                        <div class="auth-options-row">
+                            <label class="auth-remember">
+                                <input type="checkbox" id="authRemember" />
+                                <span>Remember for 30 Days</span>
+                            </label>
+                            <a href="#" class="auth-forgot-link">Forgot password</a>
+                        </div>
+
+                        <p id="authMessage" class="auth-message" role="status" aria-live="polite"></p>
+
+                        <button id="authSubmitBtn" type="submit" class="btn auth-submit">Sign in</button>
+
+                        <p class="auth-switch-text">
+                            <span id="authSwitchPrefix">Don't have account?</span>
+                            <button id="authSwitchBtn" type="button" class="auth-switch-btn">Sign up</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <div class="auth-right">
+                <div class="auth-illustration">
+                    <img src="../assets/Mobile login-bro.svg" alt="FinEdu Login Illustration" />
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/min/pages/auth.js" defer></script>
+    <script src="../js/min/app.js" defer></script>
+</body>
+</html>

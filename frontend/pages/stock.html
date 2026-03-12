@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinEdu - Stock Detail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/pages/stock.css" />
+    <link rel="stylesheet" href="../css/pages/chatbot.css" />
+</head>
+<body class="page-stock">
+    <header class="header" role="banner">
+        <div class="nav container">
+            <a href="../index.html" class="logo" aria-label="FinEdu Home"><span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span></a>
+            <nav class="nav-links" aria-label="Main Navigation">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="./screener.html" class="active">Screener</a></li>
+                    <li><a href="./tools.html">Tools</a></li>
+                    <li><a href="./courses.html">Courses</a></li>
+                    <li><a href="./learning.html">Learning</a></li>
+                    <li><a href="./seminars.html">Seminars</a></li>
+                    <li><a href="./news.html">News</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="stock-main" class="container">
+        <section class="stock-header-card" id="stockHeaderSection">
+            <div class="stock-header-top">
+                <div class="stock-header-copy">
+                    <div class="stock-identity-row">
+                        <span id="stockExchange" class="stock-exchange-pill">NSE</span>
+                        <p id="stockTicker" class="stock-ticker">--</p>
+                    </div>
+                    <h1 id="stockName">Loading stock...</h1>
+                </div>
+                <div class="stock-price-block">
+                    <p id="stockPrice" class="stock-price">--</p>
+                    <p id="stockChange" class="stock-change neutral">--</p>
+                </div>
+            </div>
+            <div class="stock-stats-row">
+                <div class="stock-stat-chip">
+                    <span class="stock-stat-label">Day Range</span>
+                    <span id="stockDayRange" class="stock-stat-value">--</span>
+                </div>
+                <div class="stock-stat-chip">
+                    <span class="stock-stat-label">52 Week Range</span>
+                    <span id="stockWeekRange" class="stock-stat-value">--</span>
+                </div>
+            </div>
+        </section>
+
+        <nav class="stock-section-nav" aria-label="Stock sections">
+            <button type="button" class="category-tab active" data-section="chartSection">Chart</button>
+            <button type="button" class="category-tab" data-section="peerComparisonSection">Peer Comparison</button>
+            <button type="button" class="category-tab" data-section="companyOverviewSection">Company Overview</button>
+        </nav>
+
+        <section id="chartSection" class="stock-chart-layout">
+            <div class="chart-main-column">
+                <div class="stock-chart-card">
+                    <div class="section-title-row section-title-row--stacked">
+                        <div>
+                            <h2>Price Chart</h2>
+                            <p class="section-subtitle">Interactive TradingView chart for the selected stock.</p>
+                        </div>
+                        <div class="chart-timeframe-selector" aria-label="Chart timeframe selector">
+                            <button type="button" class="timeframe-btn active" data-range="1D">1D</button>
+                            <button type="button" class="timeframe-btn" data-range="5D">5D</button>
+                            <button type="button" class="timeframe-btn" data-range="1M">1M</button>
+                            <button type="button" class="timeframe-btn" data-range="6M">6M</button>
+                            <button type="button" class="timeframe-btn" data-range="1Y">1Y</button>
+                            <button type="button" class="timeframe-btn" data-range="5Y">5Y</button>
+                            <button type="button" class="timeframe-btn" data-range="MAX">MAX</button>
+                        </div>
+                    </div>
+                    <div id="stockChart" class="stock-chart-placeholder">
+                        TradingView chart placeholder
+                    </div>
+                </div>
+            </div>
+            <aside class="chart-sidebar">
+                <div class="stock-summary-panel">
+                    <h3>Stock Summary</h3>
+                    <div class="summary-item">
+                        <span class="summary-label">Price</span>
+                        <span id="summaryPrice" class="summary-value">--</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Change</span>
+                        <span id="summaryChange" class="summary-value neutral">--</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Market Cap</span>
+                        <span id="summaryMarketCap" class="summary-value">--</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">PE Ratio</span>
+                        <span id="summaryPERatio" class="summary-value">--</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">EPS</span>
+                        <span id="summaryEPS" class="summary-value">--</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">ROE</span>
+                        <span id="summaryROE" class="summary-value">--</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Day Range</span>
+                        <span id="summaryDayRange" class="summary-value">--</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">52W Range</span>
+                        <span id="summaryWeekRange" class="summary-value">--</span>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <section id="peerComparisonSection" class="stock-peers-card">
+            <div class="section-title-row">
+                <div>
+                    <h2>Peer Comparison</h2>
+                    <p class="section-subtitle">Compare valuation and scale against similar companies.</p>
+                </div>
+                <p id="peersSector" class="financial-status">Loading sector peers...</p>
+            </div>
+            <div class="financial-table-wrap">
+                <table class="financial-table peer-table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th data-sort-key="price" class="sortable">Price <span class="peer-sort-icon"></span></th>
+                            <th data-sort-key="pe" class="sortable">PE <span class="peer-sort-icon"></span></th>
+                            <th data-sort-key="marketCap" class="sortable">Market Cap <span class="peer-sort-icon"></span></th>
+                            <th>Sector</th>
+                        </tr>
+                    </thead>
+                    <tbody id="peerTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="companyOverviewSection" class="stock-overview-card">
+            <div class="section-title-row">
+                <div>
+                    <h2>Company Overview</h2>
+                    <p class="section-subtitle">Business context and positioning at a glance.</p>
+                </div>
+            </div>
+            <div class="overview-sections">
+                <article class="overview-panel">
+                    <h3>Business Summary</h3>
+                    <p id="stockDescription" class="overview-description">Loading company description...</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container footer-shell">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo" aria-label="FinEdu Home">
+                        <span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span>
+                    </a>
+                    <p>FinEdu helps Indian learners build financial clarity through practical education, smarter tools, and timely market context.</p>
+                    <div class="footer-social" aria-label="FinEdu quick links">
+                        <a href="./courses.html">Courses</a>
+                        <a href="./news.html">News</a>
+                        <a href="./seminars.html">Seminars</a>
+                        <a href="../contact.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <nav class="footer-column" aria-label="Platform links">
+                        <h3>Platform</h3>
+                        <ul>
+                            <li><a href="./screener.html">Screener</a></li>
+                            <li><a href="./tools.html">Tools</a></li>
+                            <li><a href="./courses.html">Courses</a></li>
+                            <li><a href="../index.html">AI Assistant</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="footer-column" aria-label="Resources links">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="./learning.html">Learning</a></li>
+                            <li><a href="./news.html">Market News</a></li>
+                            <li><a href="./seminars.html">Seminars</a></li>
+                            <li><a href="../contact.html">Support</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="footer-column" aria-label="Company links">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="../index.html">About FinEdu</a></li>
+                            <li><a href="./auth.html">Get Started</a></li>
+                            <li><a href="../contact.html">Contact</a></li>
+                            <li><a href="../privacy.html">Privacy</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom-row">
+                <p class="footer-bottom">&copy; 2025 FinEdu. All rights reserved.</p>
+                <nav class="footer-legal-nav" aria-label="Footer legal navigation">
+                    <a href="../privacy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../contact.html">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/min/pages/stock.js"></script>
+    <script src="../js/min/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinEdu - Courses</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/pages/courses.css" />
+    <link rel="stylesheet" href="../css/pages/chatbot.css" />
+</head>
+
+<body class="page-courses">
+    <header class="header" role="banner">
+        <div class="nav container">
+            <a href="../index.html" class="logo" aria-label="FinEdu Home"><span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span></a>
+            <nav class="nav-links" aria-label="Main Navigation">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="./screener.html">Screener</a></li>
+                    <li><a href="./tools.html">Tools</a></li>
+                    <li><a href="./courses.html" class="active">Courses</a></li>
+                    <li><a href="./learning.html">Learning</a></li>
+                    <li><a href="./seminars.html">Seminars</a></li>
+                    <li><a href="./news.html">News</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="courses-main" class="container">
+        <section class="courses-hero-v2">
+            <span class="courses-kicker">FinEdu Curriculum</span>
+            <h1>Learn Finance with Structured, Action-Oriented Courses</h1>
+            <p>Build practical confidence through beginner to advanced modules in personal finance, investing, risk, and decision systems. Choose a track and start with clear weekly outcomes.</p>
+            <div class="courses-hero-actions" aria-label="Course hero actions">
+                <a href="#coursesGrid" class="btn courses-hero-btn-primary">Browse Courses</a>
+                <a href="./learning.html" class="btn courses-hero-btn-secondary">Start Beginner Track</a>
+            </div>
+            <div class="courses-hero-stats" aria-label="Course learning stats">
+                <article class="courses-hero-stat" aria-label="Total courses">
+                    <strong>19</strong>
+                    <span>Courses</span>
+                </article>
+                <article class="courses-hero-stat" aria-label="Total lessons">
+                    <strong>120+</strong>
+                    <span>Lessons</span>
+                </article>
+                <article class="courses-hero-stat" aria-label="Skill levels">
+                    <strong>Beginner → Advanced</strong>
+                    <span>Tracks</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="courses-grid-wrap">
+            <section class="featured-courses-wrap" aria-labelledby="featured-courses-title">
+                <div class="courses-grid-head">
+                    <h2 id="featured-courses-title">Featured Courses</h2>
+                    <p>Handpicked popular tracks to start now</p>
+                </div>
+                <div class="courses-grid-v2 featured-courses-grid" id="featuredCoursesGrid" aria-live="polite"></div>
+            </section>
+
+            <section class="learning-paths-wrap" aria-labelledby="learning-paths-title">
+                <div class="courses-grid-head">
+                    <h2 id="learning-paths-title">Learning Paths</h2>
+                    <p>Follow structured tracks for focused outcomes</p>
+                </div>
+                <div class="learning-paths-grid">
+                    <article class="learning-path-card">
+                        <h3>Beginner Investor Path</h3>
+                        <ul>
+                            <li>Introduction to Finance</li>
+                            <li>Investment Foundations</li>
+                            <li>Mutual Funds and SIP Strategy</li>
+                            <li>Stock Market for New Investors</li>
+                        </ul>
+                        <a href="./learning.html" class="btn small learning-path-btn">Start Path</a>
+                    </article>
+
+                    <article class="learning-path-card">
+                        <h3>Professional Finance Path</h3>
+                        <ul>
+                            <li>Financial Analysis Fundamentals</li>
+                            <li>Corporate Finance Essentials</li>
+                            <li>Financial Modeling with Excel</li>
+                            <li>Portfolio Allocation Framework</li>
+                        </ul>
+                        <a href="./learning.html" class="btn small learning-path-btn">Start Path</a>
+                    </article>
+                </div>
+            </section>
+
+            <div class="courses-toolbar">
+                <div class="courses-search-wrap">
+                    <label for="course-search-input" class="sr-only">Search courses</label>
+                    <input
+                        id="course-search-input"
+                        class="courses-search-input"
+                        type="search"
+                        placeholder="Search courses..."
+                        autocomplete="off"
+                    />
+                </div>
+                <div class="courses-filter-controls" aria-label="Course filters">
+                    <label class="sr-only" for="courses-level-filter">Filter by level</label>
+                    <select id="courses-level-filter" class="courses-filter-select">
+                        <option value="all">Level</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+
+                    <label class="sr-only" for="courses-price-filter">Filter by price</label>
+                    <select id="courses-price-filter" class="courses-filter-select">
+                        <option value="all">Price</option>
+                        <option value="Free">Free</option>
+                        <option value="Paid">Paid</option>
+                    </select>
+
+                    <label class="sr-only" for="courses-duration-filter">Filter by duration</label>
+                    <select id="courses-duration-filter" class="courses-filter-select">
+                        <option value="all">Duration</option>
+                        <option value="lt4">&lt; 4 weeks</option>
+                        <option value="4to6">4-6 weeks</option>
+                        <option value="6plus">6+ weeks</option>
+                    </select>
+
+                    <button type="button" id="courses-clear-filters" class="courses-clear-filters">Clear Filters</button>
+                </div>
+            </div>
+            <div class="courses-category-nav" role="tablist" aria-label="Course categories">
+                <button type="button" class="courses-category-pill is-active" data-category="All" aria-pressed="true">All</button>
+                <button type="button" class="courses-category-pill" data-category="Investing" aria-pressed="false">Investing</button>
+                <button type="button" class="courses-category-pill" data-category="Personal Finance" aria-pressed="false">Personal Finance</button>
+                <button type="button" class="courses-category-pill" data-category="Corporate Finance" aria-pressed="false">Corporate Finance</button>
+                <button type="button" class="courses-category-pill" data-category="Trading" aria-pressed="false">Trading</button>
+                <button type="button" class="courses-category-pill" data-category="Tax" aria-pressed="false">Tax</button>
+                <button type="button" class="courses-category-pill" data-category="Risk" aria-pressed="false">Risk</button>
+                <button type="button" class="courses-category-pill" data-category="Macro" aria-pressed="false">Macro</button>
+                <button type="button" class="courses-category-pill" data-category="Analysis" aria-pressed="false">Analysis</button>
+            </div>
+            <div class="courses-grid-head">
+                <h2>Course Library</h2>
+                <p id="courses-count-label">Loading courses...</p>
+            </div>
+            <div class="courses-grid-v2" id="coursesGrid" aria-live="polite"></div>
+
+            <section class="recommended-courses-wrap" aria-labelledby="recommended-courses-title">
+                <div class="courses-grid-head">
+                    <h2 id="recommended-courses-title">Recommended for You</h2>
+                    <p id="recommended-courses-label">Suggestions based on your selected category</p>
+                </div>
+                <div class="courses-grid-v2" id="recommendedCoursesGrid" aria-live="polite"></div>
+            </section>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container footer-shell">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo" aria-label="FinEdu Home">
+                        <span class="logo-text"><span class="logo-blue">Fin</span><span class="logo-black">Edu</span></span>
+                    </a>
+                    <p>FinEdu helps Indian learners build financial clarity through practical education, smarter tools, and timely market context.</p>
+                    <div class="footer-social" aria-label="FinEdu quick links">
+                        <a href="./courses.html">Courses</a>
+                        <a href="./news.html">News</a>
+                        <a href="./seminars.html">Seminars</a>
+                        <a href="../contact.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <nav class="footer-column" aria-label="Platform links">
+                        <h3>Platform</h3>
+                        <ul>
+                            <li><a href="./screener.html">Screener</a></li>
+                            <li><a href="./tools.html">Tools</a></li>
+                            <li><a href="./courses.html">Courses</a></li>
+                            <li><a href="../index.html">AI Assistant</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="footer-column" aria-label="Resources links">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="./learning.html">Learning</a></li>
+                            <li><a href="./news.html">Market News</a></li>
+                            <li><a href="./seminars.html">Seminars</a></li>
+                            <li><a href="../contact.html">Support</a></li>
+                        </ul>
+                    </nav>
+
+                    <nav class="footer-column" aria-label="Company links">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="../index.html">About FinEdu</a></li>
+                            <li><a href="./auth.html">Get Started</a></li>
+                            <li><a href="../contact.html">Contact</a></li>
+                            <li><a href="../privacy.html">Privacy</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom-row">
+                <p class="footer-bottom">&copy; 2025 FinEdu. All rights reserved.</p>
+                <nav class="footer-legal-nav" aria-label="Footer legal navigation">
+                    <a href="../privacy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../contact.html">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/min/pages/courses.js" defer></script>
+    <script src="../js/min/app.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+.page-screener #screener-main {
+  margin-top: 20px;
+  margin-bottom: 24px;
+}
+
+.page-screener .screener-head {
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+.page-screener .screener-layout {
+  gap: 12px;
+  align-items: start;
+}
+
+.page-screener .screener-filters-card,
+.page-screener .screener-results-card {
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+  padding: 16px;
+}
+
+.page-screener .screener-field {
+  margin-bottom: 8px;
+  gap: 4px;
+}
+
+.page-screener .screener-field label {
+  font-size: 0.84rem;
+}
+
+.page-screener .screener-field input,
+.page-screener .screener-field select {
+  padding: 9px 10px;
+  border-radius: 10px;
+}
+
+.page-screener .results-head {
+  margin-bottom: 8px;
+}
+
+.page-screener .table-wrap {
+  border-radius: 10px;
+}
+
+.page-screener .screener-table th,
+.page-screener .screener-table td {
+  padding: 9px 10px;
+  border-bottom-color: #eef2f7;
+}
+
+.page-screener .screener-row:hover td {
+  background: #fafbff;
+}
