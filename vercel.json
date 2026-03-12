@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://$RENDER_BACKEND_HOST/api/$1"
+      "destination": "https://finedu-backend-i4fm.onrender.com/api/$1"
     },
     {
       "source": "/",
