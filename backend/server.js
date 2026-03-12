@@ -22,6 +22,7 @@ import { authRequired } from "./middleware/authMiddleware.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
+console.log("Mongo URI configured:", Boolean(process.env.MONGO_URI || process.env.MONGODB_URI));
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -53,17 +54,35 @@ const envAllowedOrigins = String(process.env.CORS_ORIGINS || "")
 
 const ALLOWED_ORIGINS = [...new Set([...DEFAULT_ALLOWED_ORIGINS, ...envAllowedOrigins])];
 
+let mongoRetryTimer = null;
+
+function scheduleMongoReconnect(delayMs = 30000) {
+    if (mongoRetryTimer) return;
+    mongoRetryTimer = setTimeout(() => {
+        mongoRetryTimer = null;
+        connectMongo();
+    }, delayMs);
+}
+
+mongoose.connection.on("connected", () => {
+    console.log("MongoDB connection established");
+});
+
 mongoose.connection.once("open", () => {
     console.log("MongoDB connected");
 });
 
 mongoose.connection.on("error", (error) => {
-    console.error("MongoDB runtime error:", error.message);
+    console.error("MongoDB connection error:", {
+        message: error.message,
+        name: error.name,
+        code: error.code || "N/A"
+    });
 });
 
 mongoose.connection.on("disconnected", () => {
-    console.warn("MongoDB disconnected — will retry in 30s...");
-    setTimeout(() => connectMongo(), 30000);
+    console.warn("MongoDB disconnected. Scheduling reconnect in 30s...");
+    scheduleMongoReconnect(30000);
 });
 
 function isAllowedOrigin(origin) {
@@ -625,7 +644,7 @@ async function connectMongo() {
     } catch (error) {
         console.error("MongoDB connection failed:", error.message, "| code:", error.code || "N/A");
         console.error("Retrying MongoDB connection in 30s...");
-        setTimeout(() => connectMongo(), 30000);
+        scheduleMongoReconnect(30000);
     }
 }
 
