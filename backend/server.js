@@ -1758,7 +1758,7 @@ startSeminarReminderScheduler();
 
 app.listen(PORT, HOST, () => {
     const readiness = getAuthReadiness();
-    console.log(`Server running on ${HOST}:${PORT}`);
+    console.log(`FinEdu backend running on port ${PORT}`);
     console.log("Auth readiness:", readiness.code, readiness.details);
 });
 
