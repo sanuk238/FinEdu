@@ -40,6 +40,7 @@ const DEFAULT_ALLOWED_ORIGINS = [
     "https://finedu.vercel.app",
     "https://fin-edu-pi.vercel.app",
     "http://localhost:3000",
+    "http://localhost:5500",
     "http://localhost:5173",
     "http://localhost:5000"
 ];
@@ -1738,7 +1739,7 @@ app.get("/api/test", (req, res) => {
 app.get("/api/health", (req, res) => {
     const readiness = getAuthReadiness();
     return res.json({
-        status: "backend running",
+        status: "Backend running",
         uptimeSeconds: Math.floor(process.uptime()),
         auth: {
             ready: readiness.ready,

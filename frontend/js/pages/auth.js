@@ -15,8 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let isLogin = true;
   let isLoading = false;
 
-  const API_BASE = "";
-  const BASE_API_URL = API_BASE;
+  const API_BASE =
+    window.BASE_API_URL ||
+    window.__ENV__?.BASE_API_URL ||
+    ((window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+      ? "http://localhost:5000"
+      : "https://finedu-backend-i4fm.onrender.com");
+  const BASE_API_URL = API_BASE.replace(/\/$/, "");
 
   const setAuthFlashMessage = (message, type = "success") => {
     if (!message) return;
