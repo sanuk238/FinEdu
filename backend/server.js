@@ -30,7 +30,7 @@ const nse = new NseIndia();
 
 app.use(
     cors({
-        origin: "https://finedu.vercel.app"
+        origin: "*"
     })
 );
 app.use(express.json());
