@@ -619,6 +619,8 @@ async function connectMongo() {
             socketTimeoutMS: 45000,
         });
         console.log("MongoDB connected.");
+        const readiness = getAuthReadiness();
+        console.log("Auth readiness:", readiness.code, readiness.details);
     } catch (error) {
         console.error("MongoDB connection failed:", error.message, "| code:", error.code || "N/A");
         console.error("Retrying MongoDB connection in 30s...");
@@ -1767,9 +1769,7 @@ logStartupEnvStatus();
 startSeminarReminderScheduler();
 
 app.listen(PORT, HOST, () => {
-    const readiness = getAuthReadiness();
     console.log(`FinEdu backend running on port ${PORT}`);
-    console.log("Auth readiness:", readiness.code, readiness.details);
 });
 
 connectMongo().catch((error) => {
