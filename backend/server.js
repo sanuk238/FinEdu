@@ -55,6 +55,25 @@ const envAllowedOrigins = String(process.env.CORS_ORIGINS || "")
 const ALLOWED_ORIGINS = [...new Set([...DEFAULT_ALLOWED_ORIGINS, ...envAllowedOrigins])];
 
 let mongoRetryTimer = null;
+let mongoDiagnostics = {
+    lastError: null,
+    lastAttemptAt: null,
+    lastConnectedAt: null
+};
+
+function setMongoError(error, source = "unknown") {
+    mongoDiagnostics.lastError = {
+        source,
+        message: error?.message || String(error || "Unknown MongoDB error"),
+        name: error?.name || "Error",
+        code: error?.code || "N/A",
+        at: new Date().toISOString()
+    };
+}
+
+function clearMongoError() {
+    mongoDiagnostics.lastError = null;
+}
 
 function scheduleMongoReconnect(delayMs = 30000) {
     if (mongoRetryTimer) return;
@@ -65,6 +84,8 @@ function scheduleMongoReconnect(delayMs = 30000) {
 }
 
 mongoose.connection.on("connected", () => {
+    mongoDiagnostics.lastConnectedAt = new Date().toISOString();
+    clearMongoError();
     console.log("MongoDB connection established");
 });
 
@@ -73,6 +94,7 @@ mongoose.connection.once("open", () => {
 });
 
 mongoose.connection.on("error", (error) => {
+    setMongoError(error, "connection-event");
     console.error("MongoDB connection error:", {
         message: error.message,
         name: error.name,
@@ -625,6 +647,7 @@ async function connectMongo() {
     const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
     if (!mongoUri) {
         console.warn("MONGO_URI/MONGODB_URI not set. Authentication endpoints will be unavailable.");
+        setMongoError(new Error("MONGO_URI/MONGODB_URI not set"), "env-check");
         return;
     }
 
@@ -632,6 +655,7 @@ async function connectMongo() {
     if (mongoose.connection.readyState === 1 || mongoose.connection.readyState === 2) return;
 
     try {
+        mongoDiagnostics.lastAttemptAt = new Date().toISOString();
         await mongoose.connect(mongoUri, {
             serverSelectionTimeoutMS: 15000,
             connectTimeoutMS: 15000,
@@ -642,6 +666,7 @@ async function connectMongo() {
         const readiness = getAuthReadiness();
         console.log("Auth readiness:", readiness.code, readiness.details);
     } catch (error) {
+        setMongoError(error, "connect-attempt");
         console.error("MongoDB connection failed:", error.message, "| code:", error.code || "N/A");
         console.error("Retrying MongoDB connection in 30s...");
         scheduleMongoReconnect(30000);
@@ -1780,7 +1805,8 @@ app.get("/api/health", (req, res) => {
         },
         mongo: {
             configured: Boolean(process.env.MONGO_URI || process.env.MONGODB_URI),
-            connected: mongoose.connection?.readyState === 1
+            connected: mongoose.connection?.readyState === 1,
+            diagnostics: mongoDiagnostics
         }
     });
 });
