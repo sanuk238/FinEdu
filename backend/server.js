@@ -25,6 +25,7 @@ dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const HOST = "0.0.0.0";
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
 const yahooFinance = new YahooFinance();
 const { NseIndia } = nsePkg;
@@ -1755,9 +1756,9 @@ app.get("/api/health", (req, res) => {
 logStartupEnvStatus();
 startSeminarReminderScheduler();
 
-app.listen(PORT, () => {
+app.listen(PORT, HOST, () => {
     const readiness = getAuthReadiness();
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on ${HOST}:${PORT}`);
     console.log("Auth readiness:", readiness.code, readiness.details);
 });
 
