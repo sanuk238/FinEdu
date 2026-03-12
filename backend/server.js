@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 import Parser from "rss-parser";
 import axios from "axios";
@@ -28,14 +30,71 @@ const yahooFinance = new YahooFinance();
 const { NseIndia } = nsePkg;
 const nse = new NseIndia();
 
-app.use(
-    cors({
-        origin: "*"
-    })
-);
+const chatLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 50,
+    message: { error: "Too many chatbot requests. Please try again later." }
+});
+
+const DEFAULT_ALLOWED_ORIGINS = [
+    "https://finedu.vercel.app",
+    "https://fin-edu-pi.vercel.app",
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://localhost:5000"
+];
+
+const envAllowedOrigins = String(process.env.CORS_ORIGINS || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+const ALLOWED_ORIGINS = [...new Set([...DEFAULT_ALLOWED_ORIGINS, ...envAllowedOrigins])];
+
+mongoose.connection.once("open", () => {
+    console.log("MongoDB connected");
+});
+
+mongoose.connection.on("error", (error) => {
+    console.error("MongoDB runtime error:", error.message);
+});
+
+mongoose.connection.on("disconnected", () => {
+    console.warn("MongoDB disconnected");
+});
+
+function isAllowedOrigin(origin) {
+    if (!origin) return true;
+    if (ALLOWED_ORIGINS.includes(origin)) return true;
+
+    try {
+        const url = new URL(origin);
+        return url.hostname.endsWith(".vercel.app");
+    } catch {
+        return false;
+    }
+}
+
+const corsOptions = {
+    origin(origin, callback) {
+        if (isAllowedOrigin(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+};
+
+app.use(helmet());
+app.use(cors(corsOptions));
+app.options(/.*/, cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../frontend")));
+app.use("/api/chat", chatLimiter);
+app.use("/api/assistant", chatLimiter);
 
 const parser = new Parser({
     headers: {
@@ -290,8 +349,8 @@ function getSeminarTransporter() {
     const host = process.env.SMTP_HOST || "smtp.gmail.com";
     const port = Number(process.env.SMTP_PORT || 587);
     const secure = String(process.env.SMTP_SECURE || "false").toLowerCase() === "true";
-    const user = process.env.SMTP_USER;
-    const pass = process.env.SMTP_PASS;
+    const user = process.env.SMTP_USER || process.env.EMAIL_USER;
+    const pass = process.env.SMTP_PASS || process.env.EMAIL_PASS;
 
     if (!user || !pass) {
         return null;
@@ -309,7 +368,7 @@ function getSeminarTransporter() {
 
 async function sendSeminarConfirmationEmail(registration, seminar) {
     const transporter = getSeminarTransporter();
-    const from = process.env.EMAIL_FROM || process.env.SMTP_USER;
+    const from = process.env.EMAIL_FROM || process.env.SMTP_USER || process.env.EMAIL_USER;
     if (!transporter || !from) {
         console.warn("Skipping confirmation email: SMTP configuration missing.");
         return false;
@@ -341,7 +400,7 @@ async function sendSeminarConfirmationEmail(registration, seminar) {
 
 async function sendSeminarReminderEmail(registration, seminar) {
     const transporter = getSeminarTransporter();
-    const from = process.env.EMAIL_FROM || process.env.SMTP_USER;
+    const from = process.env.EMAIL_FROM || process.env.SMTP_USER || process.env.EMAIL_USER;
     if (!transporter || !from) {
         console.warn("Skipping reminder email: SMTP configuration missing.");
         return false;
@@ -446,7 +505,7 @@ function signAuthToken(user) {
 }
 
 function getAuthReadiness() {
-    const mongoUri = process.env.MONGODB_URI;
+    const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
     const jwtSecret = process.env.JWT_SECRET;
     const mongoConnected = Boolean(mongoose.connection?.readyState === 1);
 
@@ -454,7 +513,7 @@ function getAuthReadiness() {
         return {
             ready: false,
             code: "MONGODB_URI_MISSING",
-            message: "Authentication service unavailable: MONGODB_URI is not configured.",
+            message: "Authentication service unavailable: MONGO_URI/MONGODB_URI is not configured.",
             details: {
                 mongoConfigured: false,
                 mongoConnected,
@@ -511,10 +570,39 @@ function ensureAuthReady(res) {
     });
 }
 
+function logStartupEnvStatus() {
+    const hasMongo = Boolean(process.env.MONGO_URI || process.env.MONGODB_URI);
+    const hasJwt = Boolean(process.env.JWT_SECRET);
+    const hasGemini = Boolean(process.env.GEMINI_API_KEY);
+    const hasEmailUser = Boolean(process.env.EMAIL_USER || process.env.SMTP_USER);
+    const hasEmailPass = Boolean(process.env.EMAIL_PASS || process.env.SMTP_PASS);
+
+    console.log("Startup env status:", {
+        mongoConfigured: hasMongo,
+        jwtConfigured: hasJwt,
+        geminiConfigured: hasGemini,
+        emailUserConfigured: hasEmailUser,
+        emailPassConfigured: hasEmailPass
+    });
+
+    if (!hasMongo) {
+        console.warn("MONGO_URI/MONGODB_URI missing: auth endpoints will return 503.");
+    }
+    if (!hasJwt) {
+        console.warn("JWT_SECRET missing: auth endpoints will return 503.");
+    }
+    if (!hasGemini) {
+        console.warn("GEMINI_API_KEY missing: AI endpoints will return 503.");
+    }
+    if (!hasEmailUser || !hasEmailPass) {
+        console.warn("EMAIL_USER/EMAIL_PASS (or SMTP_USER/SMTP_PASS) missing: seminar emails will be skipped.");
+    }
+}
+
 async function connectMongo() {
-    const mongoUri = process.env.MONGODB_URI;
+    const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
     if (!mongoUri) {
-        console.warn("MONGODB_URI not set. Authentication endpoints will be unavailable.");
+        console.warn("MONGO_URI/MONGODB_URI not set. Authentication endpoints will be unavailable.");
         return;
     }
 
@@ -1102,7 +1190,7 @@ app.get("/api/stock/:symbol/peers", async (req, res) => {
     }
 });
 
-app.post("/api/auth/signup", async (req, res) => {
+const signupHandler = async (req, res) => {
     try {
         if (!ensureAuthReady(res)) return;
 
@@ -1145,9 +1233,9 @@ app.post("/api/auth/signup", async (req, res) => {
         console.error("Signup error:", error.message);
         return res.status(500).json({ error: "Unable to create account right now." });
     }
-});
+};
 
-app.post("/api/auth/login", async (req, res) => {
+const loginHandler = async (req, res) => {
     try {
         if (!ensureAuthReady(res)) return;
 
@@ -1184,10 +1272,24 @@ app.post("/api/auth/login", async (req, res) => {
             }
         });
     } catch (error) {
-        console.error("Login error:", error.message);
+        console.error("Login error:", {
+            message: error.message,
+            code: error.code,
+            stack: error.stack,
+            email: String(req.body?.email || "").trim().toLowerCase(),
+            ip: req.ip,
+            userAgent: req.get("user-agent")
+        });
         return res.status(500).json({ error: "Unable to login right now." });
     }
-});
+};
+
+app.post("/api/auth/signup", signupHandler);
+app.post("/api/auth/signup/", signupHandler);
+app.post("/api/signup", signupHandler);
+app.post("/api/auth/login", loginHandler);
+app.post("/api/auth/login/", loginHandler);
+app.post("/api/login", loginHandler);
 
 app.get("/api/auth/me", authRequired, async (req, res) => {
     try {
@@ -1215,7 +1317,7 @@ app.post("/api/auth/logout", (req, res) => {
     return res.json({ message: "Logout successful." });
 });
 
-app.post("/api/assistant", async (req, res) => {
+const handleAssistantRequest = async (req, res) => {
     const message = String(req.body?.message || "").trim();
     const history = Array.isArray(req.body?.history) ? req.body.history : [];
     const summary = String(req.body?.summary || "").trim();
@@ -1263,7 +1365,10 @@ ${message}
         console.error("Assistant error:", error.message);
         return res.status(500).json({ error: "AI service unavailable." });
     }
-});
+};
+
+app.post("/api/assistant", handleAssistantRequest);
+app.post("/api/chat", handleAssistantRequest);
 
 fetchNews();
 setInterval(fetchNews, CACHE_DURATION);
@@ -1626,12 +1731,33 @@ app.get("/api/search", async (req, res) => {
     }
 });
 
+app.get("/api/test", (req, res) => {
+    return res.json({ status: "backend working" });
+});
+
+app.get("/api/health", (req, res) => {
+    const readiness = getAuthReadiness();
+    return res.json({
+        status: "backend running",
+        uptimeSeconds: Math.floor(process.uptime()),
+        auth: {
+            ready: readiness.ready,
+            code: readiness.code
+        },
+        mongo: {
+            configured: Boolean(process.env.MONGO_URI || process.env.MONGODB_URI),
+            connected: mongoose.connection?.readyState === 1
+        }
+    });
+});
+
 connectMongo().finally(() => {
+    logStartupEnvStatus();
     startSeminarReminderScheduler();
 
     app.listen(PORT, () => {
         const readiness = getAuthReadiness();
-        console.log(`FinEdu server running at http://localhost:${PORT}`);
+        console.log(`Server running on port ${PORT}`);
         console.log("Auth readiness:", readiness.code, readiness.details);
     });
 });

@@ -9,7 +9,7 @@
         || window.__ENV__?.BASE_API_URL
         || ((window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
             ? "http://localhost:5000"
-            : "https://finedu-api.onrender.com")
+            : "https://finedu-backend-i4fm.onrender.com")
     ).replace(/\/$/, "");
     const REFRESH_INTERVAL = 60000;
     let refreshTimers = [];
@@ -322,7 +322,7 @@
             return `
                 <tr data-symbol="${stock.symbol}">
                     <td class="watchlist-cell">
-                        <span class="watchlist-star ${isInWatchlistFlag ? 'active' : ''}" data-symbol="${stock.symbol}" title="${isInWatchlistFlag ? 'Remove from Watchlist' : 'Add to Watchlist'}">${isInWatchlistFlag ? '⭐' : '☆'}</span>
+                        <span class="watchlist-star ${isInWatchlistFlag ? 'active' : ''}" data-symbol="${stock.symbol}" title="${isInWatchlistFlag ? 'Remove from Watchlist' : 'Add to Watchlist'}">${isInWatchlistFlag ? 'Γ¡É' : 'Γÿå'}</span>
                     </td>
                     <td>
                         <div class="stock-cell">
@@ -333,7 +333,7 @@
                             </div>
                         </div>
                     </td>
-                    <td class="price-cell">₹${formatNumber(stock.price)}</td>
+                    <td class="price-cell">Γé╣${formatNumber(stock.price)}</td>
                     <td class="change-cell ${changeClass}">${changePrefix}${formatNumber(stock.changePercent)}%</td>
                     <td class="volume-cell">${formatVolume(stock.volume)}</td>
                 </tr>
@@ -375,7 +375,7 @@
                     <div class="trending-icon">${getInitials(stock.name)}</div>
                     <div class="trending-info">
                         <div class="name">${stock.name || stock.symbol}</div>
-                        <div class="price">₹${formatNumber(stock.price)}</div>
+                        <div class="price">Γé╣${formatNumber(stock.price)}</div>
                     </div>
                     <div class="trending-change ${changeClass}">${changePrefix}${formatNumber(stock.changePercent)}%</div>
                 </div>
@@ -512,9 +512,9 @@
 
             if (isActive) {
                 if (sortState.direction === 'asc') {
-                    icon.textContent = '↑';
+                    icon.textContent = 'Γåæ';
                 } else {
-                    icon.textContent = '↓';
+                    icon.textContent = 'Γåô';
                 }
             } else {
                 icon.textContent = '';
@@ -670,7 +670,7 @@
             if (symbol) {
                 const isActive = isInWatchlist(symbol);
                 star.classList.toggle('active', isActive);
-                star.textContent = isActive ? '⭐' : '☆';
+                star.textContent = isActive ? 'Γ¡É' : 'Γÿå';
                 star.title = isActive ? 'Remove from Watchlist' : 'Add to Watchlist';
             }
         });
@@ -733,11 +733,11 @@
                             </div>
                         </div>
                     </td>
-                    <td class="price-cell">₹${formatNumber(stock.price)}</td>
+                    <td class="price-cell">Γé╣${formatNumber(stock.price)}</td>
                     <td class="change-cell ${changeClass}">${changePrefix}${formatNumber(stock.changePercent)}%</td>
                     <td class="volume-cell">${formatVolume(stock.volume)}</td>
                     <td class="watchlist-cell">
-                        <span class="watchlist-star active" data-symbol="${stock.symbol}" title="Remove from Watchlist">⭐</span>
+                        <span class="watchlist-star active" data-symbol="${stock.symbol}" title="Remove from Watchlist">Γ¡É</span>
                     </td>
                 </tr>
             `;
@@ -806,7 +806,7 @@
                         </div>
                     </div>
                     <div class="etf-price-row">
-                        <span class="etf-price">₹${formatNumber(etf.price)}</span>
+                        <span class="etf-price">Γé╣${formatNumber(etf.price)}</span>
                         <span class="etf-change ${changeClass}">${changePrefix}${formatNumber(etf.percentageChange)}%</span>
                     </div>
                     <div class="etf-mini-chart">
@@ -902,7 +902,7 @@
                         </div>
                     </td>
                     <td class="price-cell">${etf.symbol}</td>
-                    <td class="price-cell">₹${formatNumber(etf.price)}</td>
+                    <td class="price-cell">Γé╣${formatNumber(etf.price)}</td>
                     <td class="change-cell ${changeClass}">${changePrefix}${formatNumber(etf.percentageChange)}%</td>
                     <td class="volume-cell">${formatVolume(etf.volume)}</td>
                 </tr>
@@ -1335,7 +1335,7 @@
             header.classList.toggle('sorted-active', active);
             header.setAttribute('aria-sort', active ? (sortState.direction === 'asc' ? 'ascending' : 'descending') : 'none');
             if (icon) {
-                icon.textContent = active ? (sortState.direction === 'asc' ? '↑' : '↓') : '';
+                icon.textContent = active ? (sortState.direction === 'asc' ? 'Γåæ' : 'Γåô') : '';
             }
         });
     }
@@ -1529,7 +1529,7 @@
             header.classList.toggle('sorted-active', active);
             header.setAttribute('aria-sort', active ? (forexSort.direction === 'asc' ? 'ascending' : 'descending') : 'none');
             if (icon) {
-                icon.textContent = active ? (forexSort.direction === 'asc' ? '↑' : '↓') : '';
+                icon.textContent = active ? (forexSort.direction === 'asc' ? 'Γåæ' : 'Γåô') : '';
             }
         });
     }
@@ -2094,7 +2094,7 @@
             const updateState = () => {
                 const expanded = !card.classList.contains('is-collapsed');
                 toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-                icon.textContent = expanded ? '▼' : '▶';
+                icon.textContent = expanded ? 'Γû╝' : 'Γû╢';
             };
 
             const handleToggle = () => {
@@ -2159,3 +2159,4 @@
     });
 
 })();
+

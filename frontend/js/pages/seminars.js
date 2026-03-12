@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
         || window.__ENV__?.BASE_API_URL
         || ((window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
             ? "http://localhost:5000"
-            : "https://finedu-api.onrender.com")
+            : "https://finedu-backend-i4fm.onrender.com")
     ).replace(/\/$/, "");
 
     const seminarDateISO = "2026-03-20T13:30:00Z";
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     month: "short",
                     day: "numeric",
                     year: "numeric"
-                })} • ${dateObj.toLocaleTimeString("en-US", {
+                })} ΓÇó ${dateObj.toLocaleTimeString("en-US", {
                     hour: "numeric",
                     minute: "2-digit",
                     timeZoneName: "short"
@@ -400,3 +400,4 @@ document.addEventListener("DOMContentLoaded", () => {
         notifyForm.reset();
     });
 });
+
