@@ -1752,13 +1752,15 @@ app.get("/api/health", (req, res) => {
     });
 });
 
-connectMongo().finally(() => {
-    logStartupEnvStatus();
-    startSeminarReminderScheduler();
+logStartupEnvStatus();
+startSeminarReminderScheduler();
 
-    app.listen(PORT, () => {
-        const readiness = getAuthReadiness();
-        console.log(`Server running on port ${PORT}`);
-        console.log("Auth readiness:", readiness.code, readiness.details);
-    });
+app.listen(PORT, () => {
+    const readiness = getAuthReadiness();
+    console.log(`Server running on port ${PORT}`);
+    console.log("Auth readiness:", readiness.code, readiness.details);
+});
+
+connectMongo().catch((error) => {
+    console.error("MongoDB startup error:", error.message);
 });
