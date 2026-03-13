@@ -19,10 +19,15 @@ import { fileURLToPath } from "url";
 import User from "./models/User.js";
 import { authRequired } from "./middleware/authMiddleware.js";
 
+dotenv.config();
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
-console.log("Mongo URI configured:", Boolean(process.env.MONGO_URI || process.env.MONGODB_URI));
+console.log("Mongo URI configured:", !!process.env.MONGO_URI);
+if (!process.env.MONGO_URI && process.env.MONGODB_URI) {
+    console.warn("Using deprecated MONGODB_URI fallback. Please set MONGO_URI on Render.");
+}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -95,15 +100,12 @@ mongoose.connection.once("open", () => {
 
 mongoose.connection.on("error", (error) => {
     setMongoError(error, "connection-event");
-    console.error("MongoDB connection error:", {
-        message: error.message,
-        name: error.name,
-        code: error.code || "N/A"
-    });
+    console.error("MongoDB connection error:", error);
 });
 
 mongoose.connection.on("disconnected", () => {
-    console.warn("MongoDB disconnected. Scheduling reconnect in 30s...");
+    console.warn("MongoDB disconnected");
+    console.warn("Scheduling reconnect in 30s...");
     scheduleMongoReconnect(30000);
 });
 
@@ -643,6 +645,11 @@ function logStartupEnvStatus() {
     }
 }
 
+function isLikelyMongoUri(uri) {
+    const value = String(uri || "").trim();
+    return value.startsWith("mongodb://") || value.startsWith("mongodb+srv://");
+}
+
 async function connectMongo() {
     const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
     if (!mongoUri) {
@@ -651,23 +658,29 @@ async function connectMongo() {
         return;
     }
 
+    if (!isLikelyMongoUri(mongoUri)) {
+        console.warn("Mongo URI format looks invalid. Expected mongodb+srv://username:password@cluster.mongodb.net/finedu?retryWrites=true&w=majority");
+    }
+
     // Skip if already connected or connecting
     if (mongoose.connection.readyState === 1 || mongoose.connection.readyState === 2) return;
 
     try {
         mongoDiagnostics.lastAttemptAt = new Date().toISOString();
         await mongoose.connect(mongoUri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
             serverSelectionTimeoutMS: 15000,
             connectTimeoutMS: 15000,
             socketTimeoutMS: 45000,
-            family: 4, // Force IPv4 — fixes Render→Atlas SRV DNS resolution issues
+            family: 4,
         });
-        console.log("MongoDB connected.");
+        console.log("MongoDB connected successfully");
         const readiness = getAuthReadiness();
         console.log("Auth readiness:", readiness.code, readiness.details);
     } catch (error) {
         setMongoError(error, "connect-attempt");
-        console.error("MongoDB connection failed:", error.message, "| code:", error.code || "N/A");
+        console.error("MongoDB connection failed:", error.message);
         console.error("Retrying MongoDB connection in 30s...");
         scheduleMongoReconnect(30000);
     }
@@ -1795,18 +1808,15 @@ app.get("/api/test", (req, res) => {
 });
 
 app.get("/api/health", (req, res) => {
-    const readiness = getAuthReadiness();
+    const mongoConnected = mongoose.connection.readyState === 1;
     return res.json({
         status: "Backend running",
-        uptimeSeconds: Math.floor(process.uptime()),
         auth: {
-            ready: readiness.ready,
-            code: readiness.code
+            ready: mongoConnected
         },
         mongo: {
-            configured: Boolean(process.env.MONGO_URI || process.env.MONGODB_URI),
-            connected: mongoose.connection?.readyState === 1,
-            diagnostics: mongoDiagnostics
+            configured: !!(process.env.MONGO_URI || process.env.MONGODB_URI),
+            connected: mongoConnected
         }
     });
 });
