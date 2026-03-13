@@ -5,7 +5,7 @@ const BASE_API_URL = (
     || window.__ENV__?.BASE_API_URL
     || ((window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
         ? "http://localhost:5000"
-        : "https://finedu-backend-i4fm.onrender.com")
+        : "https://finedu-api.onrender.com")
 ).replace(/\/$/, "");
 
 const headerEls = {
@@ -220,7 +220,7 @@ function updatePeerSortUi() {
 
         header.classList.toggle("sorted-active", isActive);
         if (icon) {
-            icon.textContent = isActive ? (peerSort.direction === "asc" ? "Γåæ" : "Γåô") : "";
+            icon.textContent = isActive ? (peerSort.direction === "asc" ? "↑" : "↓") : "";
         }
     });
 }
@@ -408,4 +408,3 @@ window.addEventListener("resize", () => {
         chartContainer.style.height = `${isMobile ? 350 : 500}px`;
     }, 120);
 });
-

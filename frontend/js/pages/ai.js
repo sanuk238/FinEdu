@@ -27,7 +27,7 @@ const BASE_API_URL = (
   || window.__ENV__?.BASE_API_URL
   || ((window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
     ? "http://localhost:5000"
-    : "https://finedu-backend-i4fm.onrender.com")
+    : "https://finedu-api.onrender.com")
 ).replace(/\/$/, "")
 
 
@@ -183,7 +183,7 @@ welcomeScreen.style.display = "none"
     const history = getHistory()
 
 
-    const response = await fetch(`${BASE_API_URL}/api/chat`,{
+    const response = await fetch(`${BASE_API_URL}/api/assistant`,{
 
       method:"POST",
 
@@ -259,7 +259,7 @@ function addMessage(role,text){
     message.innerHTML = `
 
       <div class="message-avatar" aria-label="Assistant">
-        ΓÇóΓÇóΓÇó
+        •••
       </div>
 
       <div class="message-content">
@@ -349,7 +349,7 @@ function showLoading(){
   loading.innerHTML = `
 
     <div class="message-avatar" aria-label="Assistant typing">
-      ΓÇóΓÇóΓÇó
+      •••
     </div>
 
     <div class="loading-dots" role="status" aria-live="polite" aria-label="Assistant is typing">
@@ -570,4 +570,3 @@ function saveHistory(role,text){
   }
 
 }
-

@@ -1,10 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "https://finedu-backend-i4fm.onrender.com/api/$1"
-    },
-    {
       "source": "/",
       "destination": "/frontend/index.html"
     },

@@ -264,7 +264,7 @@ const BASE_API_URL = (
     || window.__ENV__?.BASE_API_URL
     || ((window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
         ? "http://localhost:5000"
-        : "https://finedu-backend-i4fm.onrender.com")
+        : "https://finedu-api.onrender.com")
 ).replace(/\/$/, "");
 
 function getSafeExternalLink(value) {
@@ -428,7 +428,7 @@ function ensureSharedChatbot() {
                                 <img src="/assets/ai svg.png" alt="" />
                             </div>
                             <div class="welcome-bubble">
-                                <p>Welcome ≡ƒæï</p>
+                                <p>Welcome 👋</p>
                                 <p>How can I help you today?</p>
                             </div>
                         </div>
@@ -445,8 +445,8 @@ function ensureSharedChatbot() {
                 <div id="chatMessages" class="chat-messages"></div>
                 <div class="chat-composer">
                     <div class="chat-actions">
-                        <button class="chat-action-btn" id="helpBtn">≡ƒô₧ Support</button>
-                        <button class="chat-action-btn" id="newChatBtn">≡ƒöä New Chat</button>
+                        <button class="chat-action-btn" id="helpBtn">📞 Support</button>
+                        <button class="chat-action-btn" id="newChatBtn">🔄 New Chat</button>
                     </div>
                     <form id="chatForm" class="chat-input-wrapper">
                         <textarea id="chatInput" placeholder="Ask about finance, investing, or planning..." rows="1"></textarea>
@@ -590,4 +590,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-

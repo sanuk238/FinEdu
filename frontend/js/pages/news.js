@@ -21,7 +21,7 @@ const BASE_API_URL = (
     || window.__ENV__?.BASE_API_URL
     || ((window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
         ? "http://localhost:5000"
-        : "https://finedu-backend-i4fm.onrender.com")
+        : "https://finedu-api.onrender.com")
 ).replace(/\/$/, "");
 
 let allProcessedItems = [];
@@ -252,7 +252,7 @@ function renderNewsCards(items) {
         card.innerHTML = `
           <div class="news-card-top">
                         <span class="news-source">${safeSource}</span>
-            <button class="bookmark-btn${isBookmarked ? " active" : ""}" data-id="${newsId}" aria-label="Bookmark this news">${isBookmarked ? "Γÿà" : "Γÿå"}</button>
+            <button class="bookmark-btn${isBookmarked ? " active" : ""}" data-id="${newsId}" aria-label="Bookmark this news">${isBookmarked ? "★" : "☆"}</button>
           </div>
           <div>
                         <div class="news-title">${safeTitle}</div>
@@ -368,4 +368,3 @@ setInterval(updateRefreshCountdown, 1000);
 
 // Auto refresh every 20 minutes
 setInterval(loadNews, REFRESH_INTERVAL_MS);
-

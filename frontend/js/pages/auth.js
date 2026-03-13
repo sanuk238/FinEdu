@@ -15,13 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let isLogin = true;
   let isLoading = false;
 
-  const API_BASE =
-    window.BASE_API_URL ||
-    window.__ENV__?.BASE_API_URL ||
-    ((window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
-      ? "http://localhost:5000"
-      : "https://finedu-backend-i4fm.onrender.com");
-  const BASE_API_URL = API_BASE.replace(/\/$/, "");
+  const BASE_API_URL = (
+    window.BASE_API_URL
+    || window.__ENV__?.BASE_API_URL
+    || ((window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+        ? "http://localhost:5000"
+      : "https://finedu-api.onrender.com")
+  ).replace(/\/$/, "");
 
   const setAuthFlashMessage = (message, type = "success") => {
     if (!message) return;
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.title = "FinEdu - Login";
       title.textContent = "Sign in to your FinEdu account";
       subtitle.textContent = "Continue your journey to smarter investing with guided lessons and practical tools.";
-      switchPrefix.textContent = "DonΓÇÖt have an account?";
+      switchPrefix.textContent = "Don’t have an account?";
       switchBtn.textContent = "Sign Up";
       nameField.classList.add("auth-hidden");
     } else {
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const { email, password, name } = validation.data;
-    const endpoint = isLogin ? "/api/login" : "/api/signup";
+    const endpoint = isLogin ? "/api/auth/login" : "/api/auth/signup";
     const requestBody = isLogin ? { email, password } : { name, email, password };
 
     try {
